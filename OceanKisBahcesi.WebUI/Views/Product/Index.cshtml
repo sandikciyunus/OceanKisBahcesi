@@ -1,0 +1,120 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@model OceanKisBahcesi.WebUI.Models.ProductDetailViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    var request = Context.Request.QueryString.ToString();
+}
+
+
+<br />
+<br />
+<div class="container">
+    <h1 style="color:cornflowerblue;">@Model.SubProductName</h1>
+</div>
+
+@*<div class="container">
+        <img src="~/Images/Products/@Model.MainImage.Image" width="1400" height="550"/>
+    </div>*@
+
+<br />
+<br />
+<div class="container">
+    @foreach (var item in Model.ProductDetails)
+    {
+        if (item.DescriptionName != null)
+        {
+            <h5 style="text-align:center;font-size:32px;">@item.DescriptionName</h5>
+        }
+        <p style="font-size:18px;">@item.Description</p>
+    }
+</div>
+<br />
+<hr>
+<div class="container">
+    <div class="row">
+        @*<div class="col-md-4">
+                <span class="fas fa-apple"></span>
+                <h5 style="font-size:32px;">Sistem Bölümleri</h5>
+                <img src="~/Images/Products/@Model.Product2DImage.Image" width="238" height="300" />
+            </div>*@
+        <div class="col-md-4">
+            @if (Model.ProductDetails.Count > 0)
+            {
+                if (request == "?language=tr-TR")
+                {
+                    <h5 style="font-size:32px;">Teknik Bilgiler</h5>
+                }
+
+                if (request == "?language=en-US")
+                {
+                    <h5 style="font-size:32px;">Technical Information</h5>
+                }
+
+                <section class="about" data-aos="fade-up">
+                    <div class="container">
+                        <ul>
+                            @foreach (var item in Model.ProductDetails)
+                            {
+                                if (item.Feauture != null)
+                                {
+                                    <li><i class="bi bi-check2-circle"></i>@item.Feauture</li>
+                                }
+
+                            }
+                        </ul>
+                    </div>
+                </section>
+
+            }
+        </div>
+        <div class="col-md-4">
+            <h5 style="font-size:32px;">Video</h5>
+            @foreach (var item in Model.ProductVideos)
+            {
+                <iframe width="560" height="315" src="@item.Url" frameborder="0" allowfullscreen></iframe>
+
+            }
+            </iframe>
+        </div>
+    </div>
+</div>
+<hr>
+<section class="portfolio">
+    @if (Model.ProductImages.Count > 0)
+    {
+        <div class="container">
+            @if (request == "?language=tr-TR")
+            {
+                <h5 style="font-size:32px;">Fotoğraflar</h5>
+            }
+
+            @if (request == "?language=en-US")
+            {
+                <h5 style="font-size:32px;">Photos</h5>
+            }
+
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+                @foreach (var item in Model.ProductImages)
+                {
+                    <div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
+                        <div class="portfolio-item">
+                            <img src="~/Images/Products/@item.Image" style="height:300px;width:500px;" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <div>
+                                    <a href="~/Images/Products/@item.Image" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+    }
+</section>
+
+
+

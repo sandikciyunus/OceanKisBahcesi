@@ -1,0 +1,161 @@
+﻿
+
+@using Microsoft.AspNetCore.Http.Extensions
+@model OceanKisBahcesi.WebUI.Models.ProductListViewModel
+@{
+    var request = Context.Request.QueryString.ToString();
+}
+@if (request == "?language=tr-TR")
+{
+    <nav id="navbar" class="navbar">
+        <ul>
+            <li><a class="" href="index.html">Anasayfa</a></li>
+            <li><a href="/about?language=tr-TR">Hakkımızda</a></li>
+            <li class="dropdown">
+                <a href="#"><span>Ürünler</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    @foreach (var item in Model.Products)
+                    {
+                        if (item.SubProducts.Count == 0)
+                        {
+                            <li><a href="/product/@item.Path/0?language=tr-TR">@item.Name</a></li>
+                        }
+
+                        if (item.SubProducts.Count > 0)
+                        {
+                            <li class="dropdown">
+                                <a href="#"><span>@item.Name</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    @foreach (var item2 in item.SubProducts)
+                                    {
+
+                                        <li><a href="/product/@item2.Path/1?language=tr-TR">@item2.Name</a></li>
+
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                    }
+
+
+
+                </ul>
+            </li>
+            <li><a href="/about?language=tr-TR">İletişim</a></li>
+            <li class="dropdown">
+                <a href="#"><span>Dil</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    <li><a href="@Url.RouteUrl(new { language = "tr-TR" })">TR</a></li>
+                    <li><a href="@Url.RouteUrl(new { language = "en-US" })">ENG</a></li>
+                </ul>
+            </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+}
+@if (request == "?language=en-US")
+{
+    <nav id="navbar" class="navbar">
+        <ul>
+            <li><a class="" href="index.html">Home</a></li>
+            <li><a href="/about?language=en-US">About</a></li>
+            <li class="dropdown">
+                <a href="#"><span>Products</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    @foreach (var item in Model.Products)
+                    {
+                        if (item.SubProducts.Count == 0)
+                        {
+                            <li><a href="/product/@item.Path/0?language=en-US">@item.Name</a></li>
+                        }
+
+                        if (item.SubProducts.Count > 0)
+                        {
+                            <li class="dropdown">
+                                <a href="#"><span>@item.Name</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    @foreach (var item2 in item.SubProducts)
+                                    {
+
+                                        <li><a href="/product/@item2.Path/1?language=en-US">@item2.Name</a></li>
+
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                    }
+
+
+
+                </ul>
+
+            </li>
+            <li><a href="/about?language=en-US">Contact</a></li>
+            <li class="dropdown">
+                <a href="#"><span>Language</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    <li><a href="@Url.RouteUrl(new { language = "tr-TR" })">TR</a></li>
+                    <li><a href="@Url.RouteUrl(new { language = "en-US" })">ENG</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+
+
+    </nav>
+}
+@if (request == "")
+{
+    <nav id="navbar" class="navbar">
+        <ul>
+            <li><a class="" href="index.html">Anasayfa</a></li>
+            <li><a href="/about?language=tr-TR">Hakkımızda</a></li>
+            <li class="dropdown">
+                <a href="#"><span>Ürünler</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    @foreach (var item in Model.Products)
+                    {
+                        if (item.SubProducts.Count == 0)
+                        {
+                            <li><a href="/product/@item.Path/0?language=tr-TR">@item.Name</a></li>
+                        }
+
+                        if (item.SubProducts.Count > 0)
+                        {
+                            <li class="dropdown">
+                                <a href="#"><span>@item.Name</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    @foreach (var item2 in item.SubProducts)
+                                    {
+
+                                        <li><a href="/product/@item2.Path/1?language=tr-TR">@item2.Name</a></li>
+
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+                    }
+
+
+
+                </ul>
+
+            </li>
+            <li><a href="/about?language=tr-TR">İletişim</a></li>
+            <li class="dropdown">
+                <a href="#"><span>Dil</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    <li><a href="@Url.RouteUrl(new { language = "tr-TR" })">TR</a></li>
+                    <li><a href="@Url.RouteUrl(new { language = "en-US" })">ENG</a></li>
+                </ul>
+            </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+
+    </nav>
+}
+
