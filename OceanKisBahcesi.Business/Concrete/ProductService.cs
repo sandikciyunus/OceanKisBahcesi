@@ -16,6 +16,16 @@ namespace OceanKisBahcesi.Business.Concrete
             _productDal = productDal;
         }
 
+        public void AddSubProductDescription(ProductDescription productDescription)
+        {
+            _productDal.AddSubProductDescription(productDescription);
+        }
+
+        public IList<SubProduct> GetAll()
+        {
+            return _productDal.GetAll();
+        }
+
         public List<ProductDetailModel> GetAllByENG(string path, int IsSubProdouct)
         {
             return _productDal.GetAllByENG(path, IsSubProdouct);
@@ -39,6 +49,16 @@ namespace OceanKisBahcesi.Business.Concrete
         public IList<Product> GetAllTR2()
         {
             return _productDal.GetList(p => p.LanguageId == 1);
+        }
+
+        public SubProduct GetById(int id)
+        {
+            return _productDal.GetById(id);
+        }
+
+        public IList<ProductDescription> GetByProductId(int productId)
+        {
+            return _productDal.GetByProductId(productId);
         }
 
         public ProductMainImage GetByPath(string path)
@@ -69,6 +89,31 @@ namespace OceanKisBahcesi.Business.Concrete
         public string ProductNameTR(string path)
         {
             return _productDal.ProductNameTR(path);
+        }
+
+        public void DeleteProductDescription(int id)
+        {
+            _productDal.DeleteProductDescription(id);
+        }
+
+        public IList<ProductImage> ListProductImagesGetByPath(string path)
+        {
+            return _productDal.ListProductImagesGetByPath(path);
+        }
+
+        public ProductImage GetProductImageByPath(string path)
+        {
+            return _productDal.GetProductImageByPath(path);
+        }
+
+        public void AddProductImage(ProductImage productImage)
+        {
+            _productDal.AddProductImage(productImage);
+        }
+
+        public void DeleteProductImage(int id)
+        {
+            _productDal.DeleteProductImage(id);
         }
     }
 }

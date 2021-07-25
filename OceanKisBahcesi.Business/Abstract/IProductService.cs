@@ -11,7 +11,12 @@ namespace OceanKisBahcesi.Business.Abstract
         IList<Product> GetAllTR();
         IList<Product> GetAllTR2();
         IList<Product> GetAllENG();
+        IList<SubProduct> GetAll();
+        IList<ProductDescription> GetByProductId(int productId);
+        IList<ProductImage> ListProductImagesGetByPath(string path);
+        SubProduct GetById(int id);
         IList<ProductVideo> GetVideoByPath(string path);
+        ProductImage GetProductImageByPath(string path);
         List<ProductDetailModel> GetAllByTR(string path, int IsSubProdouct);
         List<ProductDetailModel> GetAllByENG(string path, int IsSubProdouct);
         List<ProductImage> GetImages(string path, int IsSubProdouct);
@@ -19,5 +24,9 @@ namespace OceanKisBahcesi.Business.Abstract
         Product2DImage GetByPath2DImage(string path);
         string ProductNameTR(string path);
         string ProductNameENG(string path);
+        void AddSubProductDescription(ProductDescription productDescription);
+        void DeleteProductDescription(int id);
+        void AddProductImage(ProductImage productImage);
+        void DeleteProductImage(int id);
     }
 }

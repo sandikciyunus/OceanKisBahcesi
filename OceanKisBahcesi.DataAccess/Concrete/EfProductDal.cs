@@ -18,6 +18,18 @@ namespace OceanKisBahcesi.DataAccess.Concrete
         {
             _context = context;
         }
+
+        public void AddSubProductDescription(ProductDescription productDescription)
+        {
+            _context.ProductDescriptions.Add(productDescription);
+            _context.SaveChanges();
+        }
+
+        public IList<SubProduct> GetAll()
+        {
+            return _context.SubProducts.Include(p => p.Product).Include(p => p.Language).ToList();
+        }
+
         public List<ProductDetailModel> GetAllByENG(string path, int IsSubProdouct)
         {
 
@@ -101,6 +113,16 @@ namespace OceanKisBahcesi.DataAccess.Concrete
             return _context.Products.Include(p => p.SubProducts).Where(p => p.LanguageId == 1).ToList();
         }
 
+        public SubProduct GetById(int id)
+        {
+            return _context.SubProducts.Where(p => p.Id == id).FirstOrDefault();
+        }
+
+        public IList<ProductDescription> GetByProductId(int productId)
+        {
+            return _context.ProductDescriptions.Where(p => p.ProductId==productId).ToList();
+        }
+
         public ProductMainImage GetByPath(string path)
         {
             return _context.ProductMainImages.Where(p => p.Path == path).FirstOrDefault();
@@ -132,6 +154,36 @@ namespace OceanKisBahcesi.DataAccess.Concrete
             var product = _context.SubProducts.Where(p => p.Path == path && p.LanguageId == 1).FirstOrDefault();
             return product.Name;
 
+        }
+
+        public void DeleteProductDescription(int id)
+        {
+            var deleteProductDescription = _context.ProductDescriptions.Where(p => p.Id == id).FirstOrDefault();
+            _context.ProductDescriptions.Remove(deleteProductDescription);
+            _context.SaveChanges();
+        }
+
+        public ProductImage GetProductImageByPath(string path)
+        {
+            return _context.ProductImages.Where(p => p.Path == path).FirstOrDefault();
+        }
+
+        public IList<ProductImage> ListProductImagesGetByPath(string path)
+        {
+            return _context.ProductImages.Where(p => p.Path == path).ToList();
+        }
+
+        public void AddProductImage(ProductImage productImage)
+        {
+            _context.ProductImages.Add(productImage);
+            _context.SaveChanges();
+        }
+
+        public void DeleteProductImage(int id)
+        {
+            var productImage = _context.ProductImages.Where(p => p.Id == id).FirstOrDefault();
+            _context.ProductImages.Remove(productImage);
+            _context.SaveChanges();
         }
     }
 }

@@ -31,7 +31,7 @@ namespace OceanKisBahcesi.WebUI.Controllers
                         model.ProductImages = _productService.GetImages(path, IsSubProdouct);
                         model.ProductVideos = _productService.GetVideoByPath(path);
                         model.MainImage = _productService.GetByPath(path);
-                        model.Product2DImage =  _productService.GetByPath2DImage(path);
+                        model.Product2DImage = _productService.GetByPath2DImage(path);
                         model.SubProductName = _productService.ProductNameTR(path);
                         break;
                     case "en-US":
