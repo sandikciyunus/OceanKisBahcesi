@@ -66,35 +66,43 @@
                     <br />
                     <p>@item.AboutDescription</p>
                     <br />
-                    @if (request == "?language=tr-TR")
+                    if (item.OurVisionDescription != null)
                     {
-                        <p>VİZYONUMUZ</p>
-                    }
-                    @if (request == "?language=en-US")
-                    {
-                        <p>OUR VISION</p>
-                    }
-                    @if (request == "")
-                    {
-                        <p>MİSYONUMUZ</p>
+                        @if (request == "?language=tr-TR")
+                        {
+                            <p>VİZYONUMUZ</p>
+                        }
+                        @if (request == "?language=en-US")
+                        {
+                            <p>OUR VISION</p>
+                        }
+                        @if (request == "")
+                        {
+                            <p>MİSYONUMUZ</p>
+                        }
+
+                        <p>@item.OurVisionDescription</p>
+                        <br />
                     }
 
-                    <p>@item.OurVisionDescription</p>
-                    <br />
+                    if (item.OurMission != null)
+                    {
+                        @if (request == "?language=tr-TR")
+                        {
+                            <p>VİZYONUMUZ</p>
+                        }
+                        @if (request == "?language=en-US")
+                        {
+                            <p>OUR MISSION</p>
+                        }
+                        @if (request == "")
+                        {
+                            <p>MİSYONUMUZ</p>
+                        }
+                        <p>@item.OurMission</p>
+                    }
 
-                    @if (request == "?language=tr-TR")
-                    {
-                        <p>VİZYONUMUZ</p>
-                    }
-                    @if (request == "?language=en-US")
-                    {
-                        <p>OUR MISSION</p>
-                    }
-                    @if (request == "")
-                    {
-                        <p>MİSYONUMUZ</p>
-                    }
-                    <p>@item.OurMission</p>
+
                 }
 
             </div>

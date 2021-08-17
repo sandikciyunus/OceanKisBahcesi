@@ -28,5 +28,8 @@ namespace OceanKisBahcesi.DataAccess.Concrete.Context
         public DbSet<ProductVideo> ProductVideos { get; set; }
         public DbSet<ProductMainImage> ProductMainImages { get; set; }
         public DbSet<Product2DImage> Product2DImages { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<AddressInformation> AddressInformations { get; set; }
     }
 }

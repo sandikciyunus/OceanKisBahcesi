@@ -13,9 +13,13 @@
     <h1 style="color:cornflowerblue;">@Model.SubProductName</h1>
 </div>
 
-@*<div class="container">
-        <img src="~/Images/Products/@Model.MainImage.Image" width="1400" height="550"/>
-    </div>*@
+@if (Model.MainImage.Image != null)
+{
+    <div class="container">
+        <img style="width:100%;" src="~/Images/Products/@Model.MainImage.Image"/>
+    </div>
+}
+
 
 <br />
 <br />

@@ -20,6 +20,15 @@ namespace OceanKisBahcesi.Business.Containers.MicrosoftIoC
 
             services.AddScoped<IAboutService, AboutService>();
             services.AddScoped<IAboutDal, EfAboutDal>();
+            
+            services.AddScoped<ISliderService, SliderService>();
+            services.AddScoped<ISliderDal, EfSliderDal>();
+            
+            services.AddScoped<IServiceService, ServiceService>();
+            services.AddScoped<IServiceDal, EfServiceDal>();  
+            
+            services.AddScoped<IAddressInformationService, AddressInformationService>();
+            services.AddScoped<IAdressInformationDal, EfAddressInformationDal>();
         }
     }
 }

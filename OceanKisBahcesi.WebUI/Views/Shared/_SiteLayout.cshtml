@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http.Extensions
 @{
     var request = Context.Request.QueryString.ToString();
+    var url = Context.Request.Path;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -48,39 +49,41 @@
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <div class="logo">
-                @*  <h1 class="text-light"><a href="index.html"><span>Moderna</span></a></h1>*@
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <a href="index.html"><img src="~/GOLGELENDİRME.png" alt="Gölgelendirme" class="img-fluid"></a>
-            </div>
+            @if (request == "?language=tr-TR")
+            {
+                <div class="logo">
+                    @*  <h1 class="text-light"><a href="index.html"><span>Moderna</span></a></h1>*@
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <a href="/Home/Index?language=tr-TR"><img src="~/GOLGELENDİRME.png" alt="Gölgelendirme" class="img-fluid"></a>
+                </div>
+            }
+            @if (request == "")
+            {
+                <div class="logo">
+                    @*  <h1 class="text-light"><a href="index.html"><span>Moderna</span></a></h1>*@
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <a href="/Home/Index"><img src="~/GOLGELENDİRME.png" alt="Gölgelendirme" class="img-fluid"></a>
+                </div>
+            }
+            @if (request == "?language=en-US")
+            {
+                <div class="logo">
+                    @*  <h1 class="text-light"><a href="index.html"><span>Moderna</span></a></h1>*@
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <a href="/Home/Index?language=en-US"><img src="~/shading systems.png" alt="Gölgelendirme" class="img-fluid"></a>
+                </div>
+            }
+
             @await Component.InvokeAsync("Navbar")
             <!-- .navbar -->
 
         </div>
     </header><!-- End Header -->
     <!-- ======= Hero Section ======= -->
-    <!--<section id="hero" class="d-flex justify-cntent-center align-items-center">
-        <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">-->
-
-            <!-- Slide 1 -->
-            <!--<div class="carousel-item active">
-                <div class="carousel-container">
-                    <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Moderna</span></h2>
-                    <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                    <a href="" class="btn-get-started animate__animated animate__fadeInUp">Read More</a>
-                </div>
-            </div>
-
-            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
-            </a>
-
-            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
-            </a>
-
-        </div>
-    </section>--><!-- End Hero -->
+    @*@if (url == "/Home/Index")
+        {
+            @await Component.InvokeAsync("Slider")
+        }*@
 
     <main id="main">
         @RenderBody()
@@ -125,6 +128,9 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="~/tema/assets/vendor/aos/aos.js"></script>
     <script src="~/tema/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/tema/assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -134,8 +140,11 @@
     <script src="~/tema/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/tema/assets/vendor/waypoints/noframework.waypoints.js"></script>
 
+
     <!-- Template Main JS File -->
     <script src="~/tema/assets/js/main.js"></script>
+    <script src="~/jquery.inputmask.js"></script>
+    @RenderSection("Scripts", required: false)
 
 </body>
 
