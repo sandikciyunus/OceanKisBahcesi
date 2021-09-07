@@ -12,10 +12,12 @@ namespace OceanKisBahcesi.WebUI.Controllers
     {
         private ISliderService _sliderService;
         private IServiceService _serviceService;
-        public HomeController(ISliderService sliderService,IServiceService serviceService)
+        private IFeatureService _featureService;
+        public HomeController(ISliderService sliderService,IServiceService serviceService,IFeatureService featureService)
         {
             _sliderService = sliderService;
             _serviceService = serviceService;
+            _featureService = featureService;
         }
         public IActionResult Index()
         {
@@ -29,14 +31,23 @@ namespace OceanKisBahcesi.WebUI.Controllers
                     case "tr-TR":
                         model.Services = _serviceService.GetAllTR();
                         model.Sliders = _sliderService.GetAll();
+                        model.HomeVideos = _sliderService.GetAllHomeVideo();
+                        model.Features = _featureService.GetAllTR();
+                        ViewBag.slogan = "Beklentilerin Üstünde ve Ötesinde….";
                         break;
                     case "en-US":
                         model.Services = _serviceService.GetAllENG();
                         model.Sliders = _sliderService.GetAll();
+                        model.HomeVideos = _sliderService.GetAllHomeVideo();
+                        model.Features = _featureService.GetAllENG();
+                        ViewBag.slogan = "Above and Beyond Expactations...";
                         break;
                     default:
                         model.Services = _serviceService.GetAllTR();
                         model.Sliders = _sliderService.GetAll();
+                        model.HomeVideos = _sliderService.GetAllHomeVideo();
+                        model.Features = _featureService.GetAllTR();
+                        ViewBag.slogan = "Beklentilerin Üstünde ve Ötesinde….";
                         break;
                 }
             }

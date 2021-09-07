@@ -11,6 +11,7 @@ namespace OceanKisBahcesi.Entities.Concrete
         public string AboutDescription { get; set; }
         public string OurVisionDescription { get; set; }
         public string OurMission { get; set; }
+        public Language Language { get; set; }
         public int LanguageId { get; set; }
     }
 }

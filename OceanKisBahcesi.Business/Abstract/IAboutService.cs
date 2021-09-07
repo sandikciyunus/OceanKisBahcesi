@@ -7,6 +7,9 @@ namespace OceanKisBahcesi.Business.Abstract
 {
     public interface IAboutService
     {
+        IList<About> GetAll();
+        About GetById(int id);
+        void Update(About about);
         IList<About> GetAllTR();
         IList<About> GetAllENG();
     }

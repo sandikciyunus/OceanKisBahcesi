@@ -18,5 +18,10 @@ namespace OceanKisBahcesi.Business.Concrete
         {
             return _sliderDal.GetList();
         }
+
+        public IList<HomeVideo> GetAllHomeVideo()
+        {
+            return _sliderDal.GetAllHomeVideo();
+        }
     }
 }

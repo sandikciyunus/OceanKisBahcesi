@@ -1,0 +1,34 @@
+﻿@model OceanKisBahcesi.WebUI.Models.AboutViewModel
+@{
+    ViewData["Title"] = "AboutUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form>
+    <input type="text" hidden id="languageId" value="@Model.About.LanguageId" />
+    <input type="text" hidden id="Id" value="@Model.About.Id" />
+    <div class="form-group">
+        <label for="about">Hakkımızda</label>
+        <textarea class="form-control" rows="10" id="about">@Model.About.AboutDescription</textarea>
+    </div>
+    <div class="form-group">
+        <label for="vision">Vizyonumuz</label>
+        <textarea class="form-control" rows="10" id="vision">@Model.About.OurVisionDescription</textarea>
+    </div>
+    <div class="form-group">
+        <label for="mission">Misyonumuz</label>
+        <textarea class="form-control" rows="10" id="mission">@Model.About.OurMission</textarea>
+
+    </div>
+    <button type="button" onclick="updateAbout()" class="btn btn-success">Güncelle</button>
+</form>
+
+@section Scripts{
+
+    <script src="~/Admin/js/AboutUpdate.js"></script>
+}
+
+
+
+
+

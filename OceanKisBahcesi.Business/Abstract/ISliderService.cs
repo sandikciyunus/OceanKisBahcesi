@@ -8,5 +8,6 @@ namespace OceanKisBahcesi.Business.Abstract
     public interface ISliderService
     {
         IList<Slider> GetAll();
+        IList<HomeVideo> GetAllHomeVideo();
     }
 }

@@ -115,5 +115,20 @@ namespace OceanKisBahcesi.Business.Concrete
         {
             _productDal.DeleteProductImage(id);
         }
+
+        public void AddProduct2DImage(Product2DImage product2DImage)
+        {
+            _productDal.AddProduct2DImage(product2DImage);
+        }
+
+        public void DeleteProduct2DImage(int id)
+        {
+            _productDal.DeleteProduct2DImage(id);
+        }
+
+        public int GetByPathProduct2DImageCount(string path)
+        {
+            return _productDal.GetByPathProduct2DImageCount(path);
+        }
     }
 }

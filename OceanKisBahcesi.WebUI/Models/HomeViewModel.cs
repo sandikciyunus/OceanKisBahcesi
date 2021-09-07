@@ -10,5 +10,7 @@ namespace OceanKisBahcesi.WebUI.Models
     {
         public IList<Slider> Sliders { get; set; }
         public IList<Service> Services { get; set; }
+        public IList<HomeVideo> HomeVideos { get; set; }
+        public IList<Feature> Features { get; set; }
     }
 }

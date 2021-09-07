@@ -14,6 +14,12 @@ namespace OceanKisBahcesi.Business.Concrete
         {
             _addressInformationDal = adressInformationDal;
         }
+
+        public IList<AddressInformation> GetAll()
+        {
+            return _addressInformationDal.GetAll();
+        }
+
         public AddressInformation GetAllENG()
         {
             return _addressInformationDal.Get(p => p.LanguageId == 2);
@@ -22,6 +28,16 @@ namespace OceanKisBahcesi.Business.Concrete
         public AddressInformation GetAllTR()
         {
             return _addressInformationDal.Get(p => p.LanguageId == 1);
+        }
+
+        public AddressInformation GetById(int id)
+        {
+            return _addressInformationDal.Get(p => p.Id == id);
+        }
+
+        public void Update(AddressInformation addressInformation)
+        {
+            _addressInformationDal.Update(addressInformation);
         }
     }
 }

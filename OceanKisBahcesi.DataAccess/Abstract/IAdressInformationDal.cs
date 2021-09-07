@@ -8,5 +8,6 @@ namespace OceanKisBahcesi.DataAccess.Abstract
 {
     public interface IAdressInformationDal:IEntityRepository<AddressInformation>
     {
+        IList<AddressInformation> GetAll();
     }
 }

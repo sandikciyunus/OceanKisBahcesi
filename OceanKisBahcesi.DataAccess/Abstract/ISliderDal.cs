@@ -8,5 +8,6 @@ namespace OceanKisBahcesi.DataAccess.Abstract
 {
     public interface ISliderDal:IEntityRepository<Slider>
     {
+        IList<HomeVideo> GetAllHomeVideo();
     }
 }

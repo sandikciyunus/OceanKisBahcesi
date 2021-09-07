@@ -3,12 +3,14 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_SiteLayout.cshtml";
     var request = Context.Request.QueryString.ToString();
+    string[] emails = Model.AddressInformations.Email.Split(",").Select(s => s.Trim()).ToArray();
     var nameText = "";
     var phoneText = "";
     var emailText = "";
     var messageText = "";
     var subjectText = "";
     var buttonText = "";
+    var formTitle = "";
     if (request == "?language=en-US")
     {
         nameText = "Your Name";
@@ -17,6 +19,7 @@
         messageText = "Message";
         subjectText = "Subject";
         buttonText = "Send Message";
+        formTitle = "Contact Us";
     }
     if (request == "?language=tr-TR")
     {
@@ -26,6 +29,7 @@
         messageText = "Mesaj";
         subjectText = "Konu";
         buttonText = "Mesaj Gönder";
+        formTitle = "Bize Ulaşın";
     }
     if (request == "")
     {
@@ -35,6 +39,7 @@
         messageText = "Mesaj";
         subjectText = "Konu";
         buttonText = "Mesaj Gönder";
+        formTitle = "Bize Ulaşın";
     }
 
 }
@@ -80,7 +85,7 @@
     </div>
 </section><!-- End Contact Section -->
 <!-- ======= Contact Section ======= -->
-<section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+<section class="contact"  style="background-color:aliceblue;" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
     <div class="container">
 
         <div class="row">
@@ -100,7 +105,10 @@
                             <div style="height:190px;" class="info-box">
                                 <i class="bx bx-envelope"></i>
                                 <h3>Email Us</h3>
-                                <p>@Model.AddressInformations.Email</p>
+                                @for (int i = 0; i < emails.Length; i++)
+                                {
+                                    <p>@emails[i]</p>
+                                }
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -127,7 +135,10 @@
                             <div style="height:190px;" class="info-box">
                                 <i class="bx bx-envelope"></i>
                                 <h3>Email</h3>
-                                <p>@Model.AddressInformations.Email</p>
+                                @for (int i = 0; i < emails.Length; i++)
+                                {
+                                    <p>@emails[i]</p>
+                                }
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -154,7 +165,10 @@
                             <div style="height:190px;" class="info-box">
                                 <i class="bx bx-envelope"></i>
                                 <h3>Email</h3>
-                                <p>@Model.AddressInformations.Email</p>
+                                @for (int i = 0; i < emails.Length; i++)
+                                {
+                                    <p>@emails[i]</p>
+                                }
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -168,7 +182,9 @@
                 }
             </div>
 
+
             <div class="col-lg-6">
+                <h3>@formTitle</h3>
                 <form  method="post" role="form">
                     <div class="row">
                         <div class="col-md-6 form-group">

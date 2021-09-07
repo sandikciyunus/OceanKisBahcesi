@@ -15,6 +15,11 @@ namespace OceanKisBahcesi.Business.Concrete
             _aboutDal = aboutDal;
         }
 
+        public IList<About> GetAll()
+        {
+            return _aboutDal.GetAll();
+        }
+
         public IList<About> GetAllENG()
         {
             return _aboutDal.GetList(p => p.LanguageId == 2);
@@ -23,6 +28,16 @@ namespace OceanKisBahcesi.Business.Concrete
         public IList<About> GetAllTR()
         {
             return _aboutDal.GetList(p => p.LanguageId == 1);
+        }
+
+        public About GetById(int id)
+        {
+            return _aboutDal.Get(p => p.Id == id);
+        }
+
+        public void Update(About about)
+        {
+            _aboutDal.Update(about);
         }
     }
 }

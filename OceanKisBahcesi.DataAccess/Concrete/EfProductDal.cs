@@ -185,5 +185,25 @@ namespace OceanKisBahcesi.DataAccess.Concrete
             _context.ProductImages.Remove(productImage);
             _context.SaveChanges();
         }
+
+        public void AddProduct2DImage(Product2DImage product2DImage)
+        {
+            var update2DImage = _context.Product2DImages.Where(p => p.Path == product2DImage.Path).FirstOrDefault();
+            update2DImage.Image = product2DImage.Image;
+            _context.Product2DImages.Update(update2DImage);
+            _context.SaveChanges();
+        }
+
+        public void DeleteProduct2DImage(int id)
+        {
+            var product2DImage = _context.Product2DImages.Where(p => p.Id == id).FirstOrDefault();
+            _context.Product2DImages.Remove(product2DImage);
+            _context.SaveChanges();
+        }
+
+        public int GetByPathProduct2DImageCount(string path)
+        {
+            return _context.Product2DImages.Where(p => p.Path == path).Count();
+        }
     }
 }

@@ -37,12 +37,8 @@
 <hr>
 <div class="container">
     <div class="row">
-        @*<div class="col-md-4">
-                <span class="fas fa-apple"></span>
-                <h5 style="font-size:32px;">Sistem Bölümleri</h5>
-                <img src="~/Images/Products/@Model.Product2DImage.Image" width="238" height="300" />
-            </div>*@
-        <div class="col-md-4">
+
+        <div class="col-md-5">
             @if (Model.ProductDetails.Count > 0)
             {
                 if (request == "?language=tr-TR")
@@ -72,7 +68,18 @@
 
             }
         </div>
-        <div class="col-md-4">
+
+        @if (Model.Product2DImage.Image != null)
+        {
+            <div class="col-md-5">
+                <span class="fas fa-apple"></span>
+                <h5 style="font-size:32px;">Sistem Bölümleri</h5>
+                <img src="~/Images/2DImages/@Model.Product2DImage.Image" style="width:500px;height:450px;" />
+            </div>
+        }
+
+
+        <div class="col-md-2">
             <h5 style="font-size:32px;">Video</h5>
             @foreach (var item in Model.ProductVideos)
             {

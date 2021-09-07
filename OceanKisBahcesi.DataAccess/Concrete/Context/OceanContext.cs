@@ -31,5 +31,8 @@ namespace OceanKisBahcesi.DataAccess.Concrete.Context
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<AddressInformation> AddressInformations { get; set; }
+        public DbSet<HomeVideo> HomeVideos { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

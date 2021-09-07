@@ -1,0 +1,30 @@
+﻿@model OceanKisBahcesi.WebUI.Models.ContactViewModel
+@{
+    ViewData["Title"] = "ContactUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form>
+    <input type="text" hidden id="languageId" value="@Model.AddressInformations.LanguageId" />
+    <input type="text" hidden id="Id" value="@Model.AddressInformations.Id" />
+    <div class="form-group">
+        <label for="address">Adres</label>
+        <textarea class="form-control" rows="10" id="address">@Model.AddressInformations.Address</textarea>
+    </div>
+    <div class="form-group">
+        <label for="email">Email (Email güncellerken başına virgül işareti ekleyiniz.)</label>
+        <input type="text" class="form-control" id="email" value="@Model.AddressInformations.Email"/>
+    </div>
+    <div class="form-group">
+        <label for="phone">Telefon</label>
+        <input type="text" class="form-control" id="phone" value="@Model.AddressInformations.Phone" />
+    </div>
+    <button type="button" onclick="updateContact()" class="btn btn-success">Güncelle</button>
+</form>
+
+@section Scripts{
+
+    <script src="~/Admin/js/ContactUpdate.js"></script>
+}
+
+

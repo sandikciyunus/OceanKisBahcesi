@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,18 @@ namespace OceanKisBahcesi.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+   .AddCookie(opt =>
+   {
+       opt.Cookie.HttpOnly = true;
+       opt.Cookie.Name = "OceanCookie";
+       opt.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
+       opt.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest;
+
+
+       opt.ExpireTimeSpan = TimeSpan.FromMinutes(90);
+       opt.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Login/Index");
+   });
             services.AddControllersWithViews();
             services.AddDependencies();
         }
@@ -46,6 +59,7 @@ namespace OceanKisBahcesi.WebUI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

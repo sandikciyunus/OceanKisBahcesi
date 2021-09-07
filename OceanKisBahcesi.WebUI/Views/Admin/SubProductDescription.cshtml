@@ -1,0 +1,56 @@
+﻿@model OceanKisBahcesi.WebUI.Models.SubProductViewModel
+@{
+    ViewData["Title"] = "SubProductDescription";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<form>
+    <input type="text" hidden id="languageId" value="@Model.SubProduct.LanguageId" />
+    <input type="text" hidden id="path" value="@Model.SubProduct.Path" />
+    <input type="text" hidden id="productId" value="@Model.SubProduct.Id" />
+    <div class="form-group">
+        <label for="description">Açıklama</label>
+        <textarea id="description" class="form-control"></textarea>
+    </div>
+    <button type="button" onclick="addSubProductDescription()" class="btn btn-primary">Ekle</button>
+</form>
+<hr />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@Model.SubProduct.Name Ürününe Ait Özellikler</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="descriptionTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Açıklama</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ProductDescriptions)
+                    {
+
+                        if (item.Description != null)
+                        {
+                            <tr>
+                                <td>@item.Description</td>
+                                <td>
+                                    <button type="button" onclick="deleteSubProductDescription(@item.Id)" class="btn btn-danger btn-sm">Sil</button>
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Admin/js/AddSubProductDescription.js"></script>
+
+}
+
+

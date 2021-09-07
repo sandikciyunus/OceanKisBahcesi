@@ -4,6 +4,7 @@ using OceanKisBahcesi.DataAccess.Concrete.Context;
 using OceanKisBahcesi.Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace OceanKisBahcesi.DataAccess.Concrete
@@ -14,6 +15,11 @@ namespace OceanKisBahcesi.DataAccess.Concrete
         public EfSliderDal(OceanContext context) : base(context)
         {
             _context = context;
+        }
+
+        public IList<HomeVideo> GetAllHomeVideo()
+        {
+            return _context.HomeVideos.ToList();
         }
     }
 }
