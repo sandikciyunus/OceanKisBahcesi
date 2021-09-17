@@ -1,0 +1,38 @@
+﻿@model OceanKisBahcesi.WebUI.Models.ProductUpdateViewModel
+@{
+    ViewData["Title"] = "ProductUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form>
+    <input type="text" hidden id="id" value="@Model.Product.Id" />
+    <div class="form-group">
+        <label for="name">Ürün Adı</label>
+        <input type="text" class="form-control" id="name" value="@Model.Product.Name" />
+    </div>
+    <div class="form-group">
+        <label>Dil Seç</label>
+        <select id="languageId" class="form-control">
+            @foreach (var item in Model.Languages)
+            {
+                if (Model.Product.LanguageId == item.Id)
+                {
+                    <option selected value="@item.Id">@item.Name</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+
+
+            }
+        </select>
+    </div>
+    <button type="button" onclick="updateProduct()" class="btn btn-success">Güncelle</button>
+</form>
+
+@section Scripts{
+
+    <script src="~/Admin/js/ProductUpdate.js"></script>
+}
+

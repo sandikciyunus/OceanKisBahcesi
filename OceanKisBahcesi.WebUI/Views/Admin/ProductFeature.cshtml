@@ -1,0 +1,65 @@
+﻿@model OceanKisBahcesi.WebUI.Models.ProductViewModel
+@{
+    ViewData["Title"] = "ProductFeature";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form>
+    <input type="text" hidden id="languageId" value="@Model.Product.LanguageId" />
+    <input type="text" hidden id="path" value="@Model.Product.Path" />
+    <input type="text" hidden id="productId" value="@Model.Product.Id" />
+    <div class="form-group">
+        <label for="exampleInputEmail1">Özellik</label>
+        <input type="text" class="form-control" id="feature" aria-describedby="feature">
+    </div>
+    <button type="button" onclick="addSubProductFeature()" class="btn btn-primary">Ekle</button>
+</form>
+<hr />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@Model.Product.Name Ürününe Ait Özellikler</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            @if (Model.ProductDescriptions.Count() > 0)
+            {
+                <table class="table table-bordered" id="featureTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Özellik</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ProductDescriptions)
+                        {
+
+                            if (item.Feature != null)
+                            {
+                                <tr>
+                                    <td>@item.Feature</td>
+                                    <td>
+                                        <button type="button" onclick="deleteSubProductFeature(@item.Id)" class="btn btn-danger btn-sm">Sil</button>
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-center">Ürüne ait özellik bulunmadı</p>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Admin/js/AddProductFeature.js"></script>
+
+}
+
+

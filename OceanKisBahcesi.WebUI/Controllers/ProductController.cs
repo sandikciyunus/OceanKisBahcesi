@@ -32,7 +32,14 @@ namespace OceanKisBahcesi.WebUI.Controllers
                         model.ProductVideos = _productService.GetVideoByPath(path);
                         model.MainImage = _productService.GetByPath(path);
                         model.Product2DImage = _productService.GetByPath2DImage(path);
-                        model.SubProductName = _productService.ProductNameTR(path);
+                        if(IsSubProdouct==1)
+                        {
+                            model.SubProductName = _productService.ProductNameTR(path);
+                        }
+                        else
+                        {
+                            model.SubProductName = _productService.ProductNameTR2(path);
+                        }
                         break;
                     case "en-US":
                         model.ProductDetails = _productService.GetAllByENG(path, IsSubProdouct);
@@ -40,7 +47,14 @@ namespace OceanKisBahcesi.WebUI.Controllers
                         model.ProductVideos = _productService.GetVideoByPath(path);
                         model.MainImage = _productService.GetByPath(path);
                         model.Product2DImage = _productService.GetByPath2DImage(path);
-                        model.SubProductName = _productService.ProductNameENG(path);
+                        if (IsSubProdouct == 1)
+                        {
+                            model.SubProductName = _productService.ProductNameENG(path);
+                        }
+                        else
+                        {
+                            model.SubProductName = _productService.ProductNameENG2(path);
+                        }
                         break;
                     default:
                         model.ProductDetails = _productService.GetAllByTR(path, IsSubProdouct);
@@ -48,7 +62,14 @@ namespace OceanKisBahcesi.WebUI.Controllers
                         model.ProductVideos = _productService.GetVideoByPath(path);
                         model.MainImage = _productService.GetByPath(path);
                         model.Product2DImage = _productService.GetByPath2DImage(path);
-                        model.SubProductName = _productService.ProductNameTR(path);
+                        if (IsSubProdouct == 1)
+                        {
+                            model.SubProductName = _productService.ProductNameTR(path);
+                        }
+                        else
+                        {
+                            model.SubProductName = _productService.ProductNameTR2(path);
+                        }
                         break;
                 }
             }

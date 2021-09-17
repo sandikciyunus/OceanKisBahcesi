@@ -130,5 +130,60 @@ namespace OceanKisBahcesi.Business.Concrete
         {
             return _productDal.GetByPathProduct2DImageCount(path);
         }
+
+        public IList<Product> GetAllProducts()
+        {
+            return _productDal.GetList();
+        }
+
+        public void UpdateSubProducts(SubProduct subProduct)
+        {
+            _productDal.UpdateSubProducts(subProduct);
+        }
+
+        public IList<Product> GetAllWithLanguage()
+        {
+            return _productDal.GetAllWithLanguage();
+        }
+
+        public void AddProduct(Product product)
+        {
+            _productDal.Add(product);
+        }
+
+        public IList<Language> GetAllLanguages()
+        {
+            return _productDal.GetAllLanguages();
+        }
+
+        public string ProductNameTR2(string path)
+        {
+            return _productDal.ProductNameTR2(path);
+        }
+
+        public string ProductNameENG2(string path)
+        {
+            return _productDal.ProductNameENG2(path);
+        }
+
+        public Product GetProductById(int id)
+        {
+            return _productDal.Get(p => p.Id == id);
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            _productDal.UpdateProducts(product);
+        }
+
+        public IList<ProductDescription> GetByProductId2(int productId)
+        {
+            return _productDal.GetByProductId2(productId);
+        }
+
+        public int CountProduct2DImages(string path)
+        {
+            return _productDal.CountProduct2DImages(path);
+        }
     }
 }

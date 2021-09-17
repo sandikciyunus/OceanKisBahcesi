@@ -9,6 +9,7 @@ namespace OceanKisBahcesi.Entities.Concrete
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public Language Language { get; set; }
         public int LanguageId { get; set; }
         public string Path { get; set; }
         public IList<SubProduct> SubProducts { get; set; }

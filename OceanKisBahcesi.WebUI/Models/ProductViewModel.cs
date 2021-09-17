@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace OceanKisBahcesi.WebUI.Models
 {
-    public class ProductImageViewModel
+    public class ProductViewModel
     {
-        public ProductImage ProductImage { get; set; }
         public Product Product { get; set; }
-        public IList<ProductImage> ProductImages { get; set; }
+        public IList<ProductDescription> ProductDescriptions { get; set; }
+        public Product2DImage Product2DImage { get; set; }
+        public int Count2DImages { get; set; }
     }
 }

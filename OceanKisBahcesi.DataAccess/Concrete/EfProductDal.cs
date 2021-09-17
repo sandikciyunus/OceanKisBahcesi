@@ -120,7 +120,11 @@ namespace OceanKisBahcesi.DataAccess.Concrete
 
         public IList<ProductDescription> GetByProductId(int productId)
         {
-            return _context.ProductDescriptions.Where(p => p.ProductId==productId).ToList();
+            return _context.ProductDescriptions.Where(p => p.ProductId==productId && p.IsSubProduct==1).ToList();
+        }
+        public IList<ProductDescription> GetByProductId2(int productId)
+        {
+            return _context.ProductDescriptions.Where(p => p.ProductId == productId && p.IsSubProduct == 0).ToList();
         }
 
         public ProductMainImage GetByPath(string path)
@@ -152,6 +156,19 @@ namespace OceanKisBahcesi.DataAccess.Concrete
         public string ProductNameTR(string path)
         {
             var product = _context.SubProducts.Where(p => p.Path == path && p.LanguageId == 1).FirstOrDefault();
+            return product.Name;
+
+        }
+
+        public string ProductNameENG2(string path)
+        {
+            var product = _context.Products.Where(p => p.Path == path && p.LanguageId == 2).FirstOrDefault();
+            return product.Name;
+        }
+
+        public string ProductNameTR2(string path)
+        {
+            var product = _context.Products.Where(p => p.Path == path && p.LanguageId == 1).FirstOrDefault();
             return product.Name;
 
         }
@@ -202,6 +219,39 @@ namespace OceanKisBahcesi.DataAccess.Concrete
         }
 
         public int GetByPathProduct2DImageCount(string path)
+        {
+            return _context.Product2DImages.Where(p => p.Path == path).Count();
+        }
+
+        public void UpdateSubProducts(SubProduct subProduct)
+        {
+            var updateSubProduct = _context.SubProducts.Where(p => p.Id == subProduct.Id).FirstOrDefault();
+            updateSubProduct.Name = subProduct.Name;
+            updateSubProduct.ProductId = subProduct.ProductId;
+            _context.SubProducts.Update(updateSubProduct);
+            _context.SaveChanges();
+        }
+
+        public IList<Product> GetAllWithLanguage()
+        {
+            return _context.Products.Include(p => p.Language).Include(p=>p.SubProducts).ToList();
+        }
+
+        public IList<Language> GetAllLanguages()
+        {
+            return _context.Languages.ToList();
+        }
+
+        public void UpdateProducts(Product product)
+        {
+            var updateProduct = _context.Products.Where(p => p.Id == product.Id).FirstOrDefault();
+            updateProduct.Name = product.Name;
+            updateProduct.LanguageId = product.LanguageId;
+            _context.Products.Update(updateProduct);
+            _context.SaveChanges();
+        }
+
+        public int CountProduct2DImages(string path)
         {
             return _context.Product2DImages.Where(p => p.Path == path).Count();
         }

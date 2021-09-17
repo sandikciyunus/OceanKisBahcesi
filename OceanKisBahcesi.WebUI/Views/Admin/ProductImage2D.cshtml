@@ -1,16 +1,16 @@
-﻿@model OceanKisBahcesi.WebUI.Models.ProductDetailViewModel
+﻿@model OceanKisBahcesi.WebUI.Models.ProductViewModel
 @{
     ViewData["Title"] = "Image2D";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <form enctype="multipart/form-data">
-    <input hidden id="path" value="@Model.Product2DImage.Path" />
+    <input hidden id="path" value="@Model.Product.Path" />
     <div class="form-group">
         <label for="exampleFormControlFile1">Resim Seç</label>
         <input type="file" accept="image/*" class="form-control-file" id="file">
     </div>
-    <button type="button" onclick="addSubProduct2DImage()" class="btn btn-info">Ekle</button>
+    <button type="button" onclick="addProduct2DImage()" class="btn btn-info">Ekle</button>
 </form>
 
 <hr />
@@ -20,7 +20,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            @if (Model.Product2DImage.Image != null)
+            @if (Model.Count2DImages>0)
             {
                 <table class="table table-bordered" id="ımageTable" width="100%" cellspacing="0">
                     <thead>
@@ -35,8 +35,8 @@
                                 <img src="/Images/2DImages/@Model.Product2DImage.Image" width="200" height="200">
                             </td>
                             @*<td>
-                            <button type="button" onclick="deleteSubProduct2DImage(@Model.Product2DImage.Id)" class="btn btn-danger btn-sm">Sil</button>
-                        </td>*@
+                                    <button type="button" onclick="deleteSubProduct2DImage(@Model.Product2DImage.Id)" class="btn btn-danger btn-sm">Sil</button>
+                                </td>*@
                         </tr>
                     </tbody>
                 </table>
@@ -51,7 +51,7 @@
 </div>
 
 @section Scripts{
-    <script src="~/Admin/js/AddSubProductImage.js"></script>
+    <script src="~/Admin/js/AddProductImage.js"></script>
 
 }
 

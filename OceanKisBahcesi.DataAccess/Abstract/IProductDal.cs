@@ -11,9 +11,12 @@ namespace OceanKisBahcesi.DataAccess.Abstract
     {
         IList<Product> GetAllENG();
         IList<Product> GetAllTR();
+        IList<Product> GetAllWithLanguage();
         IList<SubProduct> GetAll();
+        IList<Language> GetAllLanguages();
         SubProduct GetById(int id);
         IList<ProductDescription> GetByProductId(int productId);
+        IList<ProductDescription> GetByProductId2(int productId);
         IList<ProductImage> ListProductImagesGetByPath(string path);
         ProductMainImage GetByPath(string path);
         ProductImage GetProductImageByPath(string path);
@@ -24,6 +27,9 @@ namespace OceanKisBahcesi.DataAccess.Abstract
         IList<ProductVideo> GetVideoByPath(string path);
         string ProductNameTR(string path);
         string ProductNameENG(string path);
+
+        string ProductNameTR2(string path);
+        string ProductNameENG2(string path);
         void AddSubProductDescription(ProductDescription productDescription);
         void DeleteProductDescription(int id);
 
@@ -34,5 +40,10 @@ namespace OceanKisBahcesi.DataAccess.Abstract
         void DeleteProduct2DImage(int id);
 
         int GetByPathProduct2DImageCount(string path);
+
+        void UpdateSubProducts(SubProduct subProduct);
+        void UpdateProducts(Product product);
+        int CountProduct2DImages(string path);
+
     }
 }

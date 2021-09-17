@@ -1,0 +1,32 @@
+﻿@model OceanKisBahcesi.WebUI.Models.ProductAddViewModel
+@{
+    ViewData["Title"] = "ProductAdd";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<form>
+    <div class="form-group">
+        <label for="name">Ürün Adı</label>
+        <input type="text" class="form-control" id="name" />
+    </div>
+    <div class="form-group">
+        <label for="name">Path(Türkçe ile ingilizcenin path'i aynı olmalı)</label>
+        <input type="text" class="form-control" id="path" />
+    </div>
+    <div class="form-group">
+        <label>Dil Seç</label>
+        <select id="languageId" class="form-control">
+            @foreach (var item in Model.Languages)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+    <button type="button" onclick="addProduct()" class="btn btn-info">Ekle</button>
+</form>
+
+@section Scripts{
+
+    <script src="~/Admin/js/ProductAdd.js"></script>
+}
+
+

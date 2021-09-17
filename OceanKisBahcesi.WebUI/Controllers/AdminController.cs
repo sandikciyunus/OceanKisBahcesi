@@ -6,8 +6,11 @@ using OceanKisBahcesi.Entities.Concrete;
 using OceanKisBahcesi.WebUI.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace OceanKisBahcesi.WebUI.Controllers
@@ -199,5 +202,127 @@ namespace OceanKisBahcesi.WebUI.Controllers
                 _productService.DeleteProduct2DImage(id);
                 return Json(new { success = true, message = "Resim başarıyla silindi" });
         }
+
+        public IActionResult SubProductUpdate(int id)
+        {
+            return View(new SubProductModel
+            {
+                SubProduct = _productService.GetById(id),
+                Products = _productService.GetAllProducts()
+            });
+        }
+
+        public IActionResult UpdateSubProducts(SubProduct subProduct)
+        {
+            if(subProduct.Name==null)
+            {
+                return Json(new { success = false, message = "Ürün adı boş bırakılamaz" });
+            }
+            _productService.UpdateSubProducts(subProduct);
+            return Json(new { success = true, message = "Alt ürün başarıyla güncellendi" });
+        }
+
+        public IActionResult ProductList()
+        {
+            return View(new ProductListViewModel
+            {
+                Products = _productService.GetAllWithLanguage()
+            });
+        }
+
+        public IActionResult ProductAdd()
+        {
+            return View(new ProductAddViewModel
+            {
+                Languages = _productService.GetAllLanguages()
+            });
+        }
+        public IActionResult AddProduct(Product product)
+        {
+            if(product.Name==null)
+            {
+                return Json(new { success = false, message = "Ürün adı boş bırakılamaz" });
+            }
+            if (product.Path == null)
+            {
+                return Json(new { success = false, message = "Path boş bırakılamaz" });
+            }
+            _productService.AddProduct(product);
+            return Json(new { success = true, message = "Ürün başarıyla güncellendi" });
+
+        }
+
+        public IActionResult ProductUpdate(int id)
+        {
+            return View(new ProductUpdateViewModel
+            {
+                Product = _productService.GetProductById(id),
+                Languages = _productService.GetAllLanguages()
+            });
+        }
+
+
+        public IActionResult UpdateProducts(Product product)
+        {
+            if (product.Name == null)
+            {
+                return Json(new { success = false, message = "Ürün adı boş bırakılamaz" });
+            }
+            _productService.UpdateProduct(product);
+            return Json(new { success = true, message = "Ürün başarıyla güncellendi" });
+        }
+
+        public IActionResult ProductDescription(int id)
+        {
+            return View(new ProductViewModel
+            {
+                Product = _productService.GetProductById(id),
+                ProductDescriptions = _productService.GetByProductId2(id)
+            });
+        }
+
+        public IActionResult ProductFeature(int id)
+        {
+            return View(new ProductViewModel
+            {
+                Product = _productService.GetProductById(id),
+                ProductDescriptions = _productService.GetByProductId2(id)
+            });
+        }
+        public IActionResult ProductImage2D(string path,int id)
+        {
+            return View(new ProductViewModel
+            {
+                Product=_productService.GetProductById(id),
+                Product2DImage = _productService.GetByPath2DImage(path),
+                Count2DImages=_productService.CountProduct2DImages(path)
+            });
+        }
+
+        public IActionResult ProductImage(string path,int id)
+        {
+            return View(new ProductImageViewModel
+            {
+                Product = _productService.GetProductById(id),
+                ProductImages = _productService.ListProductImagesGetByPath(path)
+            });
+        }
+
+        public IActionResult AddProductImage(ProductImage productImage, IFormFile file)
+        {
+            if (file == null)
+            {
+                return Json(new { success = false, message = "Resim seçmek zorundasınız" });
+            }
+            var fileName = file.FileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Products/" + fileName);
+            var stream = new FileStream(path, FileMode.Create);
+            file.CopyTo(stream);
+            productImage.Image = fileName;
+            productImage.IsSubProduct = 0;
+            _productService.AddProductImage(productImage);
+            return Json(new { success = true, message = "Resim başarıyla eklendi" });
+        }
+
     }
 }
