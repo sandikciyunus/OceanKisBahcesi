@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "AddSlider";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<form>
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Resim Seç</label>
+        <input type="file" accept="image/*" class="form-control-file" id="file">
+    </div>
+    <div class="form-check">
+       
+            <input class="form-check-input" type="checkbox" value="1" checked id="IsActive">
+            <label class="form-check-label" for="IsActive">
+                Aktif Mi?
+            </label>
+    </div>
+    <button type="button" onclick="addSlider()" class="btn btn-info">Ekle</button>
+</form>
+
+@section Scripts{
+
+    <script src="~/Admin/js/SliderAdd.js"></script>
+}
+
+

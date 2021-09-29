@@ -1,0 +1,32 @@
+﻿@model OceanKisBahcesi.WebUI.Models.HomeVideoViewModel
+@{
+    ViewData["Title"] = "HomeVideoUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form>
+    <input type="text" hidden id="id" value="@Model.HomeVideo.Id" />
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Video Seç</label>
+        <input type="file" accept="video/*" class="form-control-file" id="file">
+    </div>
+    <div class="form-group">
+        <label for="title">Şimdiki Video</label>
+        <br />
+        <video width="400" controls>
+            <source src="~/Video/@Model.HomeVideo.VideoName" type="video/mp4">
+            <source src="mov_bbb.ogg" type="video/ogg">
+        </video>
+    </div>
+
+
+    <button type="button" onclick="updateVideo()" class="btn btn-success">Güncelle</button>
+</form>
+
+@section Scripts{
+
+    <script src="~/Admin/js/HomeVideoUpdate.js"></script>
+}
+
+
+

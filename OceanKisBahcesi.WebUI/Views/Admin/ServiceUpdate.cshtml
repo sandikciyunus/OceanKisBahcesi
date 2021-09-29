@@ -1,0 +1,28 @@
+﻿@model OceanKisBahcesi.WebUI.Models.ServiceViewModel
+@{
+    ViewData["Title"] = "ServiceUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form>
+    <input type="text" hidden id="id" value="@Model.Service.Id" />
+    <input type="text" hidden id="logo" value="@Model.Service.Logo" />
+    <input type="text" hidden id="languageId" value="@Model.Service.LanguageId" />
+    <div class="form-group">
+        <label for="title">Başlık</label>
+        <input type="text" class="form-control" id="title" value="@Model.Service.Title" />
+    </div>
+    <div class="form-group">
+        <label for="description">Açıklama</label>
+       <textarea class="form-control" id="description">@Model.Service.Description</textarea>
+    </div>
+
+    <button type="button" onclick="updateService()" class="btn btn-success">Güncelle</button>
+</form>
+
+@section Scripts{
+
+    <script src="~/Admin/js/ServiceUpdate.js"></script>
+}
+
+

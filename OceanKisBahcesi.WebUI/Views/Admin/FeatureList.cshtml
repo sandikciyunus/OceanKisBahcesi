@@ -1,0 +1,50 @@
+﻿@model OceanKisBahcesi.WebUI.Models.FeatureListViewModel
+@{
+    ViewData["Title"] = "FeatureList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Özellikler</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="featureTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Özellikler</th>
+                        <th>Resim</th>
+                        <th>Dil</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Features)
+                    {
+                        <tr>
+                            <td>
+                               @Html.Raw(item.Name)
+                            </td>
+                            <td>
+                                <img src="~/Images/Features/@item.Image" width="300" height="200"/>
+                            </td>
+                            <td>@item.Language.Name</td>
+                            <td>
+                                <a class="btn btn-success btn-sm" href="/Admin/FeatureUpdate?id=@item.Id">Güncelle</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script src="~/Admin/js/FeatureList.js"></script>
+}
+
+
+
+

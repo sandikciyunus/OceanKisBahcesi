@@ -15,17 +15,23 @@ using System.Threading.Tasks;
 
 namespace OceanKisBahcesi.WebUI.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private IProductService _productService;
         private IAboutService _aboutService;
         private IAddressInformationService _addressInformationService;
-        public AdminController(IProductService productService, IAboutService aboutService, IAddressInformationService addressInformationService)
+        private IServiceService _serviceService;
+        private ISliderService _sliderService;
+        private IFeatureService _featureService;
+        public AdminController(IProductService productService, IAboutService aboutService, IAddressInformationService addressInformationService, IServiceService serviceService, ISliderService sliderService, IFeatureService featureService)
         {
             _productService = productService;
             _aboutService = aboutService;
             _addressInformationService = addressInformationService;
+            _serviceService = serviceService;
+            _sliderService = sliderService;
+            _featureService = featureService;
         }
         public IActionResult SubProductList()
         {
@@ -199,8 +205,8 @@ namespace OceanKisBahcesi.WebUI.Controllers
 
         public IActionResult DeleteSubProduct2DImage(int id)
         {
-                _productService.DeleteProduct2DImage(id);
-                return Json(new { success = true, message = "Resim başarıyla silindi" });
+            _productService.DeleteProduct2DImage(id);
+            return Json(new { success = true, message = "Resim başarıyla silindi" });
         }
 
         public IActionResult SubProductUpdate(int id)
@@ -214,7 +220,7 @@ namespace OceanKisBahcesi.WebUI.Controllers
 
         public IActionResult UpdateSubProducts(SubProduct subProduct)
         {
-            if(subProduct.Name==null)
+            if (subProduct.Name == null)
             {
                 return Json(new { success = false, message = "Ürün adı boş bırakılamaz" });
             }
@@ -239,7 +245,7 @@ namespace OceanKisBahcesi.WebUI.Controllers
         }
         public IActionResult AddProduct(Product product)
         {
-            if(product.Name==null)
+            if (product.Name == null)
             {
                 return Json(new { success = false, message = "Ürün adı boş bırakılamaz" });
             }
@@ -289,17 +295,17 @@ namespace OceanKisBahcesi.WebUI.Controllers
                 ProductDescriptions = _productService.GetByProductId2(id)
             });
         }
-        public IActionResult ProductImage2D(string path,int id)
+        public IActionResult ProductImage2D(string path, int id)
         {
             return View(new ProductViewModel
             {
-                Product=_productService.GetProductById(id),
+                Product = _productService.GetProductById(id),
                 Product2DImage = _productService.GetByPath2DImage(path),
-                Count2DImages=_productService.CountProduct2DImages(path)
+                Count2DImages = _productService.CountProduct2DImages(path)
             });
         }
 
-        public IActionResult ProductImage(string path,int id)
+        public IActionResult ProductImage(string path, int id)
         {
             return View(new ProductImageViewModel
             {
@@ -323,6 +329,181 @@ namespace OceanKisBahcesi.WebUI.Controllers
             _productService.AddProductImage(productImage);
             return Json(new { success = true, message = "Resim başarıyla eklendi" });
         }
+        public IActionResult AddProduct2DImage(Product2DImage product2DImage, IFormFile file)
+        {
+            if (file == null)
+            {
+                return Json(new { success = false, message = "Resim seçmek zorundasınız" });
+            }
+            var fileName = file.FileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/2DImages/" + fileName);
+            var stream = new FileStream(path, FileMode.Create);
+            file.CopyTo(stream);
+            product2DImage.Image = fileName;
+            _productService.Add2DImageProduct(product2DImage);
+            return Json(new { success = true, message = "Resim başarıyla eklendi" });
+        }
 
+        public IActionResult ServiceList()
+        {
+            return View(new ServiceListViewModel
+            {
+                Services = _serviceService.GetAll()
+            });
+        }
+
+        public IActionResult ServiceUpdate(int id)
+        {
+            return View(new ServiceViewModel
+            {
+                Service = _serviceService.GetById(id)
+            });
+        }
+
+        public IActionResult UpdateService(Service service)
+        {
+            if (service.Title == null)
+            {
+                return Json(new { success = false, message = "Başlık alanı boş bırakılamaz" });
+            }
+            if (service.Description == null)
+            {
+                return Json(new { success = false, message = "Açıklama alanı boş bırakılamaz" });
+            }
+            _serviceService.Update(service);
+            return Json(new { success = true, message = "Servis başarıyla güncellendi" });
+
+        }
+
+        public IActionResult HomeVideo()
+        {
+            return View(new HomeVideoListViewModel
+            {
+                HomeVideos = _sliderService.GetAllHomeVideo()
+            });
+        }
+
+        public IActionResult HomeVideoUpdate(int id)
+        {
+            return View(new HomeVideoViewModel
+            {
+                HomeVideo = _sliderService.GetById(id)
+            });
+        }
+
+        public IActionResult UpdateHomeVideo(HomeVideo homeVideo, IFormFile file)
+        {
+            if (file == null)
+            {
+                return Json(new { success = false, message = "Video seçmek zorundasınız" });
+            }
+            var fileName = file.FileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Video/" + fileName);
+            var stream = new FileStream(path, FileMode.Create);
+            file.CopyTo(stream);
+            homeVideo.VideoName = fileName;
+            _sliderService.UpdateVideo(homeVideo);
+            return Json(new { success = true, message = "Video başarıyla güncellendi" });
+        }
+
+        public IActionResult FeatureList()
+        {
+            return View(new FeatureListViewModel
+            {
+                Features = _featureService.GetAll()
+            });
+        }
+
+        public IActionResult FeatureUpdate(int id)
+        {
+            return View(new FeatureViewModel
+            {
+                Feature = _featureService.GetById(id)
+            });
+        }
+
+        public IActionResult UpdateFeature(Feature feature, IFormFile file)
+        {
+            if (feature.Name == null)
+            {
+                return Json(new { success = false, message = "Özellik alanı boş bırakılamaz" });
+            }
+            if (file == null)
+            {
+                _featureService.UpdateFeatureName(feature);
+                return Json(new { success = true, message = "Özellik başarıyla güncellendi" });
+            }
+            var fileName = file.FileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Features/" + fileName);
+            var stream = new FileStream(path, FileMode.Create);
+            file.CopyTo(stream);
+            feature.Image = fileName;
+            _featureService.UpdateFeatureImage(feature);
+            return Json(new { success = true, message = "Özellik başarıyla güncellendi" });
+        }
+
+        public IActionResult SliderList()
+        {
+            return View(new SliderListViewModel
+            {
+                Sliders = _sliderService.GetAll()
+            });
+        }
+
+        public IActionResult SliderUpdate(int id)
+        {
+            return View(new SliderViewModel
+            {
+                Slider = _sliderService.GetBySliderId(id)
+            });
+        }
+        public IActionResult UpdateSlider(Slider slider, IFormFile file)
+        {
+
+            if (file == null)
+            {
+                _sliderService.UpdateIsActive(slider);
+                return Json(new { success = true, message = "Başarıyla güncellendi" });
+            }
+            var fileName = file.FileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Sliders/" + fileName);
+            var stream = new FileStream(path, FileMode.Create);
+            file.CopyTo(stream);
+            slider.Name = fileName;
+            _sliderService.UpdateSlider(slider);
+            return Json(new { success = true, message = "Başarıyla güncellendi" });
+        }
+
+        public IActionResult AddSlider()
+        {
+            return View();
+        }
+
+        public IActionResult SliderAdd(Slider slider, IFormFile file)
+        {
+
+            if (file == null)
+            {
+                return Json(new { success = false, message = "Resim seçmek zorundasınız" });
+            }
+            var fileName = file.FileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Sliders/" + fileName);
+            var stream = new FileStream(path, FileMode.Create);
+            file.CopyTo(stream);
+            slider.Name = fileName;
+            _sliderService.AddSlider(slider);
+            return Json(new { success = true, message = "Başarıyla güncellendi" });
+        }
+
+        public IActionResult DeleteSlider(int id)
+        {
+            var slider = _sliderService.GetBySliderId(id);
+            if(slider.IsActive==1)
+            {
+                return Json(new { success = false, message = "Aktif resim silinemez" });
+            }
+            _sliderService.DeleteSlider(slider);
+            return Json(new { success = true, message = "Resim başarıyla silindi" });
+        }
     }
 }

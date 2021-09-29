@@ -9,5 +9,14 @@ namespace OceanKisBahcesi.Business.Abstract
     {
         IList<Slider> GetAll();
         IList<HomeVideo> GetAllHomeVideo();
+        HomeVideo GetById(int id);
+        Slider GetBySliderId(int id);
+        void UpdateVideo(HomeVideo homeVideo);
+        void Update(Slider slider);
+        void UpdateSlider(Slider slider);
+        void UpdateIsActive(Slider slider);
+        void AddSlider(Slider slider);
+        int CountIsActive();
+        void DeleteSlider(Slider slider);
     }
 }

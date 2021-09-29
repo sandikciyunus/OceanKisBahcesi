@@ -255,5 +255,11 @@ namespace OceanKisBahcesi.DataAccess.Concrete
         {
             return _context.Product2DImages.Where(p => p.Path == path).Count();
         }
+
+        public void Add2DImageProduct(Product2DImage product2DImage)
+        {
+            _context.Product2DImages.Add(product2DImage);
+            _context.SaveChanges();
+        }
     }
 }

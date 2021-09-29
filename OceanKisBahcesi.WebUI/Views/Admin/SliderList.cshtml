@@ -1,0 +1,58 @@
+﻿@model OceanKisBahcesi.WebUI.Models.SliderListViewModel
+@{
+    ViewData["Title"] = "SliderList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<a class="btn btn-info btn-sm" href="/Admin/AddSlider">Resim Ekle</a>
+<br />
+<br />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Slider</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="sliderTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Resim</th>
+                        <th>Aktiflik Durumu</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Sliders)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/Images/Sliders/@item.Name" width="300" height="200" />
+                            </td>
+                            <td>
+                                @if(item.IsActive==1)
+                                {
+                                   <p>Aktif</p>
+                                }
+                                else
+                                {
+                                    <p>Pasif</p>
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-success btn-sm" href="/Admin/SliderUpdate?id=@item.Id">Güncelle</a>
+                                <button class="btn btn-danger btn-sm" onclick="deleteSlider(@item.Id)">Sil</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script src="~/Admin/js/SliderList.js"></script>
+}
+
+
+
+

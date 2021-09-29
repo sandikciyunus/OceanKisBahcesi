@@ -10,7 +10,16 @@
         <label for="exampleFormControlFile1">Resim Seç</label>
         <input type="file" accept="image/*" class="form-control-file" id="file">
     </div>
+    @if (Model.Count2DImages > 0)
+    {
+        <button type="button" onclick="updateProduct2DImage()" class="btn btn-success">Güncelle</button>
+
+    }
+    else {
     <button type="button" onclick="addProduct2DImage()" class="btn btn-info">Ekle</button>
+
+    }
+
 </form>
 
 <hr />

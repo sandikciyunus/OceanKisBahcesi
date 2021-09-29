@@ -1,0 +1,28 @@
+﻿@model OceanKisBahcesi.WebUI.Models.FeatureViewModel
+@{
+    ViewData["Title"] = "FeatureUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form>
+    <input type="text" hidden id="id" value="@Model.Feature.Id" />
+    <input type="text" hidden id="sort" value="@Model.Feature.Sort" />
+    <input type="text" hidden id="languageId" value="@Model.Feature.LanguageId" />
+    <div class="form-group">
+        <label for="editor1">Özellikler</label>
+        <textarea class="form-control" id="editor1">@Model.Feature.Name</textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Resim Seç</label>
+        <input type="file" accept="image/*" class="form-control-file" id="file">
+    </div>
+
+    <button type="button" onclick="updateFeature()" class="btn btn-success">Güncelle</button>
+</form>
+
+@section Scripts{
+
+    <script src="~/Admin/js/FeatureUpdate.js"></script>
+}
+
+

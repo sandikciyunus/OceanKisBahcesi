@@ -37,6 +37,7 @@ namespace OceanKisBahcesi.DataAccess.Abstract
         void DeleteProductImage(int id);
 
         void AddProduct2DImage(Product2DImage product2DImage);
+        void Add2DImageProduct(Product2DImage product2DImage);
         void DeleteProduct2DImage(int id);
 
         int GetByPathProduct2DImageCount(string path);

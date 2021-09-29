@@ -1,0 +1,46 @@
+﻿@model OceanKisBahcesi.WebUI.Models.HomeVideoListViewModel
+@{
+    ViewData["Title"] = "HomeVideo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Anasayfa Video</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="videoTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Video</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.HomeVideos)
+                    {
+                        <tr>
+                            <td>
+                                <video width="400" controls>
+                                    <source src="~/Video/@item.VideoName" type="video/mp4">
+                                    <source src="mov_bbb.ogg" type="video/ogg">
+                                </video>
+                            </td>
+                            <td>
+                                <a class="btn btn-success btn-sm" href="/Admin/HomeVideoUpdate?id=@item.Id">Güncelle</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script src="~/Admin/js/HomeVideo.js"></script>
+}
+
+
+

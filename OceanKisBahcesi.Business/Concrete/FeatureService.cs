@@ -15,6 +15,11 @@ namespace OceanKisBahcesi.Business.Concrete
             _featureDal = featureDal;
         }
 
+        public IList<Feature> GetAll()
+        {
+            return _featureDal.GetAll();
+        }
+
         public IList<Feature> GetAllENG()
         {
             return _featureDal.GetList(p => p.LanguageId == 2);
@@ -23,6 +28,21 @@ namespace OceanKisBahcesi.Business.Concrete
         public IList<Feature> GetAllTR()
         {
             return _featureDal.GetList(p => p.LanguageId == 1);
+        }
+
+        public Feature GetById(int id)
+        {
+            return _featureDal.Get(p => p.Id == id);
+        }
+
+        public void UpdateFeatureImage(Feature feature)
+        {
+            _featureDal.UpdateFeatureImage(feature);
+        }
+
+        public void UpdateFeatureName(Feature feature)
+        {
+            _featureDal.UpdateFeatureName(feature);
         }
     }
 }

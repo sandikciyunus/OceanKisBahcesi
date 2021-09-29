@@ -42,5 +42,6 @@ namespace OceanKisBahcesi.Business.Abstract
         string ProductNameENG2(string path);
         void UpdateProduct(Product product);
         int CountProduct2DImages(string path);
+        void Add2DImageProduct(Product2DImage product2DImage);
     }
 }
