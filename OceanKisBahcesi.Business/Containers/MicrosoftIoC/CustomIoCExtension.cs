@@ -35,6 +35,9 @@ namespace OceanKisBahcesi.Business.Containers.MicrosoftIoC
 
             services.AddScoped<IAddressInformationService, AddressInformationService>();
             services.AddScoped<IAdressInformationDal, EfAddressInformationDal>();
+
+            services.AddScoped<ICatalogService, CatalogService>();
+            services.AddScoped<ICatalogDal, EfCatalogDal>();
         }
     }
 }

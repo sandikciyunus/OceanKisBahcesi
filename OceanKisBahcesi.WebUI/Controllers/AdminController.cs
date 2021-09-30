@@ -505,5 +505,115 @@ namespace OceanKisBahcesi.WebUI.Controllers
             _sliderService.DeleteSlider(slider);
             return Json(new { success = true, message = "Resim başarıyla silindi" });
         }
+
+        public IActionResult AddSubProductVideo(string path,int id)
+        {
+            return View(new ProductVideoViewModel
+            {
+               SubProduct=_productService.GetById(id),
+               ProductVideos  = _productService.GetVideoByPath(path)
+            });
+        }
+
+        public IActionResult SubProductAddVideo(ProductVideo productVideo)
+        {
+            if(productVideo.Url==null)
+            {
+                return Json(new { success = false, message = "Url boş bırakılamaz" });
+            }
+            if (_productService.CountVideGetByPath(productVideo.Path) > 0)
+            {
+                return Json(new { success = false, message = "Önce var olan videoyu silmelisiniz" });
+
+            }
+            _productService.AddProductVideo(productVideo);
+            return Json(new { success = true, message = "Video başarıyla eklendi" });
+        }
+        public IActionResult DeleteVideo(int id)
+        {
+            var deleteProductVideo = _productService.GetProductVideoById(id);
+            _productService.DeleteVideo(deleteProductVideo);
+            return Json(new { success = true, message = "Video başarıyla silindi" });
+
+        }
+
+        public IActionResult AddSubProductMainImage(string path, int id)
+        {
+            return View(new ProductMainImageViewModel
+            {
+                SubProduct = _productService.GetById(id),
+                ProductMainImages = _productService.ListProductProductMainImageGetByPath(path)
+            });
+        }
+
+        public IActionResult MainImageAdd(ProductMainImage productMainImage, IFormFile file)
+        {
+
+            if (file == null)
+            {
+                return Json(new { success = false, message = "Resim seçmek zorundasınız" });
+            }
+            if(_productService.CountMainImageGetByPath(productMainImage.Path)>0)
+            {
+                return Json(new { success = false, message = "Önce var olan ana resmi silmelisiniz" });
+
+            }
+            var fileName = file.FileName;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Products/" + fileName);
+            var stream = new FileStream(path, FileMode.Create);
+            file.CopyTo(stream);
+            productMainImage.Image = fileName;
+            _productService.AddProductImage(productMainImage);
+            return Json(new { success = true, message = "Başarıyla güncellendi" });
+        }
+
+        public IActionResult DeleteMainImage(int id)
+        {
+            var deleteProductMainImage = _productService.GetProductImageById(id);
+            _productService.DeleteMainImage(deleteProductMainImage);
+            return Json(new { success = true, message = "Resim başarıyla silindi" });
+
+        }
+
+        public IActionResult AddProductVideo(string path, int id)
+        {
+            return View(new ProductVideoViewModel
+            {
+                Product = _productService.GetByProductId3(id),
+                ProductVideos = _productService.GetVideoByPath(path)
+            });
+        }
+        public IActionResult AddProductMainImage(string path, int id)
+        {
+            return View(new ProductMainImageViewModel
+            {
+                Product = _productService.GetByProductId3(id),
+                ProductMainImages = _productService.ListProductProductMainImageGetByPath(path)
+            });
+        }
+
+        public IActionResult SubProductAdd()
+        {
+            return View(new SubProductAddViewModel
+            {
+                Products=_productService.GetAllWithLanguage(),
+                Languages = _productService.GetAllLanguages()
+            });
+        }
+
+        public IActionResult AddSubProduct(SubProduct subProduct)
+        {
+            if (subProduct.Name == null)
+            {
+                return Json(new { success = false, message = "Alt ürün adı boş bırakılamaz" });
+            }
+            if (subProduct.Path == null)
+            {
+                return Json(new { success = false, message = "Path boş bırakılamaz" });
+            }
+            _productService.AddSubProduct(subProduct);
+            return Json(new { success = true, message = "Alt ürün başarıyla eklendi" });
+
+        }
     }
 }

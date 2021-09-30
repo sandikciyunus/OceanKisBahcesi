@@ -1,0 +1,60 @@
+﻿@model OceanKisBahcesi.WebUI.Models.ProductVideoViewModel
+@{
+    ViewData["Title"] = "AddSubProductVideo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<form>
+    <input type="text" hidden id="path" value="@Model.SubProduct.Path" />
+    <div class="form-group">
+        <label for="url">Video Url</label>
+        <input type="text" class="form-control" id="url" /> 
+    </div>
+    <button type="button" onclick="addSubProductVideo()" class="btn btn-primary">Ekle</button>
+</form>
+<hr />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@Model.SubProduct.Name Ürününe Ait Video</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            @if(Model.ProductVideos.Count()>0)
+            {
+            <table class="table table-bordered" id="descriptionTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Video</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ProductVideos)
+                    {
+                        <tr>
+                            <td>
+                                <iframe type="text/html" class="embed-responsive-item" src="@item.Url"></iframe>
+                            </td>
+                            <td><button class="btn btn-danger btn-sm" onclick="deleteVideo(@item.Id)">Sil</button></td>
+                        </tr>
+                    }
+
+
+
+                </tbody>
+            </table>
+            }
+            else
+            {
+                <p class="text-center">Henüz video yüklenmedi</p>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Admin/js/AddSubProductVideo.js"></script>
+
+}
+
+

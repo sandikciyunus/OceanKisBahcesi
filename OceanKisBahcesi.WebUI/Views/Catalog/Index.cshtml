@@ -1,0 +1,87 @@
+﻿@model OceanKisBahcesi.WebUI.Models.CatalogListViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    var request = Context.Request.QueryString.ToString();
+}
+
+<section class="breadcrumbs">
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+            @if (request == "?language=tr-TR")
+            {
+                <h2>E-Katalog</h2>
+            }
+            @if (request == "?language=en-US")
+            {
+                <h2>E-Catalog</h2>
+            }
+            @if (request == "")
+            {
+                <h2>E-Katalog</h2>
+            }
+            <ol>
+                @if (request == "?language=tr-TR")
+                {
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li>E-Katalog</li>
+                }
+                @if (request == "?language=en-US")
+                {
+                    <li><a href="index.html">Home</a></li>
+                    <li>E-Catalog</li>
+                }
+                @if (request == "")
+                {
+                    <li><a href="index.html">Anasayfa</a></li>
+                    <li>E-Katalog</li>
+                }
+
+            </ol>
+        </div>
+
+    </div>
+</section>
+<br />
+<br />
+<section class="portfolio">
+    @if (Model.Catalogs.Count > 0)
+    {
+        <div class="container">
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+                @foreach (var item in Model.Catalogs)
+                {
+                    <div class="col-lg-6 col-md-6 portfolio-wrap filter-app">
+                        <div class="portfolio-item">
+                            <img src="~/Images/Catalogs/@item.Image" style="height:300px;width:700px;" class="img-fluid" alt="">
+                            <div class="portfolio-info">
+                                <div>
+                                    <a href="~/Images/Catalogs/@item.Image" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+
+        @if (request == "?language=tr-TR")
+        {
+            <h2 class="text-center"><a  href="https://prezi.com/view/416VAICnUPYhWRsna4I2/" target="_blank">E-Katalog sayfamıza gitmek için tıklayınız</a></h2>
+        }
+        @if (request == "?language=en-US")
+        {
+            <h2 class="text-center"><a href="https://prezi.com/view/416VAICnUPYhWRsna4I2/" target="_blank">Click to go to our E-Catalog page</a></h2>
+        }
+        @if (request == "")
+        {
+            <h2 class="text-center"><a href="https://prezi.com/view/416VAICnUPYhWRsna4I2/" target="_blank">E-Katalog sayfamıza gitmek için tıklayınız</a></h2>
+        }
+
+    }
+</section>
+

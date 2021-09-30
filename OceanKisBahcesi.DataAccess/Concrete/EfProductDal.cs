@@ -2,12 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using OceanKisBahcesi.DataAccess.Abstract;
 using OceanKisBahcesi.DataAccess.Concrete.Context;
+using OceanKisBahcesi.DataAccess.Helper;
 using OceanKisBahcesi.Entities.Concrete;
 using OceanKisBahcesi.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace OceanKisBahcesi.DataAccess.Concrete
 {
@@ -259,6 +261,84 @@ namespace OceanKisBahcesi.DataAccess.Concrete
         public void Add2DImageProduct(Product2DImage product2DImage)
         {
             _context.Product2DImages.Add(product2DImage);
+            _context.SaveChanges();
+        }
+
+        public ProductVideo GetProductVideoByPath(string path)
+        {
+            return _context.ProductVideos.Where(p => p.Path == path).FirstOrDefault();
+        }
+
+        public void AddProductVideo(ProductVideo productVideo)
+        {
+            productVideo.Url = StringExtensions.UrlToEmbedCode(productVideo.Url);
+            _context.ProductVideos.Add(productVideo);
+            _context.SaveChanges();
+        }
+
+        public int CountVideGetByPath(string path)
+        {
+            return _context.ProductVideos.Where(p => p.Path == path).Count();
+        }
+
+        public void DeleteVideo(ProductVideo productVideo)
+        {
+            _context.ProductVideos.Remove(productVideo);
+            _context.SaveChanges();
+        }
+
+        public ProductVideo GetProductVideoById(int id)
+        {
+            return _context.ProductVideos.Where(p => p.Id == id).FirstOrDefault();
+        }
+
+        public IList<ProductMainImage> ListProductProductMainImageGetByPath(string path)
+        {
+            return _context.ProductMainImages.Where(p => p.Path == path).ToList();
+        }
+
+        public void AddProductImage(ProductMainImage productMainImage)
+        {
+            _context.ProductMainImages.Add(productMainImage);
+            _context.SaveChanges();
+        }
+
+        public int CountMainImageGetByPath(string path)
+        {
+            return _context.ProductMainImages.Where(p => p.Path == path).Count();
+        }
+
+        public void DeleteMainImage(ProductMainImage productMainImage)
+        {
+            _context.ProductMainImages.Remove(productMainImage);
+            _context.SaveChanges();
+        }
+
+        public ProductMainImage GetProductImageById(int id)
+        {
+            return _context.ProductMainImages.Where(p => p.Id == id).FirstOrDefault();
+        }
+
+        public Product GetByProductId3(int id)
+        {
+            return _context.Products.Where(p => p.Id == id).FirstOrDefault();
+        }
+
+        public void AddSubProduct(SubProduct subProduct)
+        {
+            _context.SubProducts.Add(subProduct);
+            _context.SaveChanges();
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+        }
+
+        public void DeleteSubProduct(SubProduct subProduct)
+        {
+            _context.SubProducts.Remove(subProduct);
             _context.SaveChanges();
         }
     }

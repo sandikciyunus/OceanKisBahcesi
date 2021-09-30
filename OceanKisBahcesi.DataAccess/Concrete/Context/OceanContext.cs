@@ -34,5 +34,6 @@ namespace OceanKisBahcesi.DataAccess.Concrete.Context
         public DbSet<HomeVideo> HomeVideos { get; set; }
         public DbSet<Feature> Features { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Catalog> Catalogs { get; set; }
     }
 }

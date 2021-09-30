@@ -27,6 +27,7 @@ namespace OceanKisBahcesi.Business.Abstract
         ProductMainImage GetByPath(string path);
         Product2DImage GetByPath2DImage(string path);
         Product GetProductById(int id);
+        ProductVideo GetProductVideoByPath(string path);
         string ProductNameTR(string path);
         string ProductNameENG(string path);
         void AddSubProductDescription(ProductDescription productDescription);
@@ -43,5 +44,19 @@ namespace OceanKisBahcesi.Business.Abstract
         void UpdateProduct(Product product);
         int CountProduct2DImages(string path);
         void Add2DImageProduct(Product2DImage product2DImage);
+        void AddProductVideo(ProductVideo productVideo);
+        int CountVideGetByPath(string path);
+        void DeleteVideo(ProductVideo productVideo);
+        ProductVideo GetProductVideoById(int id);
+        IList<ProductMainImage> ListProductProductMainImageGetByPath(string path);
+        ProductMainImage GetProductImageById(int id);
+        void AddProductImage(ProductMainImage productMainImage);
+
+        int CountMainImageGetByPath(string path);
+        void DeleteMainImage(ProductMainImage productMainImage);
+        Product GetByProductId3(int id);
+        void AddSubProduct(SubProduct subProduct);
+        void DeleteProduct(Product product);
+        void DeleteSubProduct(SubProduct subProduct);
     }
 }

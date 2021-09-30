@@ -1,0 +1,64 @@
+﻿@model OceanKisBahcesi.WebUI.Models.ProductMainImageViewModel
+@{
+    ViewData["Title"] = "AddProductMainImage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form enctype="multipart/form-data">
+    <input hidden id="path" value="@Model.Product.Path" />
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Resim Seç</label>
+        <input type="file" accept="image/*" class="form-control-file" id="file">
+    </div>
+    <button type="button" onclick="addProductMainImage()" class="btn btn-success">Ekle</button>
+
+</form>
+
+<hr />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Ürüne ait Ana resim</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            @if (Model.ProductMainImages.Count() > 0)
+            {
+                <table class="table table-bordered" id="ımageTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Resim</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ProductMainImages)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="/Images/Products/@item.Image" width="200" height="200">
+                                </td>
+                                <td>
+                                    <button type="button" onclick="deleteSubProductMainImage(@item.Id)" class="btn btn-danger btn-sm">Sil</button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-center">Ürüne ait Ana resim bulunamadı.</p>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Admin/js/AddProductMainImage.js"></script>
+
+}
+
+
+

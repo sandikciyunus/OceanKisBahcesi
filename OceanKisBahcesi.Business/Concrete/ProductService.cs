@@ -190,5 +190,75 @@ namespace OceanKisBahcesi.Business.Concrete
         {
             _productDal.Add2DImageProduct(product2DImage);
         }
+
+        public ProductVideo GetProductVideoByPath(string path)
+        {
+            return _productDal.GetProductVideoByPath(path);
+        }
+
+        public void AddProductVideo(ProductVideo productVideo)
+        {
+            _productDal.AddProductVideo(productVideo);
+        }
+
+        public int CountVideGetByPath(string path)
+        {
+            return _productDal.CountVideGetByPath(path);
+        }
+
+        public void DeleteVideo(ProductVideo productVideo)
+        {
+            _productDal.DeleteVideo(productVideo);
+        }
+
+        public ProductVideo GetProductVideoById(int id)
+        {
+            return _productDal.GetProductVideoById(id);
+        }
+
+        public IList<ProductMainImage> ListProductProductMainImageGetByPath(string path)
+        {
+            return _productDal.ListProductProductMainImageGetByPath(path);
+        }
+
+        public ProductMainImage GetProductImageById(int id)
+        {
+            return _productDal.GetProductImageById(id);
+        }
+
+        public void AddProductImage(ProductMainImage productMainImage)
+        {
+            _productDal.AddProductImage(productMainImage);
+        }
+
+        public int CountMainImageGetByPath(string path)
+        {
+            return _productDal.CountMainImageGetByPath(path);
+        }
+
+        public void DeleteMainImage(ProductMainImage productMainImage)
+        {
+            _productDal.DeleteMainImage(productMainImage);
+        }
+
+        public Product GetByProductId3(int id)
+        {
+            return _productDal.GetByProductId3(id);
+        }
+
+        public void AddSubProduct(SubProduct subProduct)
+        {
+            _productDal.AddSubProduct(subProduct);
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            _productDal.DeleteProduct(product);
+        }
+
+        public void DeleteSubProduct(SubProduct subProduct)
+        {
+            _productDal.DeleteSubProduct(subProduct);
+        }
     }
 }
